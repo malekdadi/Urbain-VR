@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Gestion des Réclamations</title>
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <header class="header">
+    <div class="container d-flex justify-content-between align-items-center">
+      <a href="index.html" class="logo d-flex align-items-center me-auto">
+        <h1 class="sitename">Urbain VR</h1>
+      </a>
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="index.html" class="active">Accueil</a></li>
+          <li><a href="users.html">Utilisateurs</a></li>
+          <li><a href="urbain-projects.html">Projets Urbains</a></li>
+          <li><a href="packs.html">Packs</a></li>
+          <li><a href="about.html">A propos</a></li>
+          <a class="btn-getstarted" href="contact.html">Contactez-nous</a>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="container">
+      <div class="row mt-4">
+        <div class="col-lg-12">
+          <h1 class="text-center">Gestion des Réclamations</h1>
+
+          <!-- Filtre des réclamations -->
+          <div class="d-flex justify-content-between mb-3">
+            <div>
+              <label for="projectFilter">Filtrer par projet:</label>
+              <select id="projectFilter" class="form-control w-auto">
+                <option value="all">Tous les projets</option>
+                <!-- Les options seront générées dynamiquement selon les projets -->
+              </select>
+            </div>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addReclamationModal">Soumettre une réclamation</button>
+          </div>
+
+          <!-- Tableau des réclamations -->
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nom du projet</th>
+                <th>Type de réclamation</th>
+                <th>Utilisateur</th>
+                <th>Date</th>
+                <th>Statut</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="reclamationsList">
+              <!-- Réclamations ajoutées dynamiquement ici -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal Ajouter Réclamation -->
+  <div class="modal fade" id="addReclamationModal" tabindex="-1" aria-labelledby="addReclamationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addReclamationModalLabel">Soumettre une réclamation</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="addReclamationForm">
+            <div class="mb-3">
+              <label for="reclamationProject" class="form-label">Nom du projet</label>
+              <select id="reclamationProject" class="form-control" required>
+                <!-- Options des projets disponibles -->
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="reclamationType" class="form-label">Type de réclamation</label>
+              <input type="text" class="form-control" id="reclamationType" placeholder="Type de réclamation" required>
+            </div>
+            <div class="mb-3">
+              <label for="reclamationDescription" class="form-label">Description</label>
+              <textarea class="form-control" id="reclamationDescription" placeholder="Décrivez votre réclamation" rows="4" required></textarea>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+              <button type="submit" class="btn btn-primary">Soumettre</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer id="footer" class="footer position-relative light-background">
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6 footer-about">
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span class="sitename">Projet Urbain</span>
+          </a>
+          <div class="footer-contact pt-3">
+            <p>A108 Adam Street, New York, NY 535022</p>
+            <p><strong>Phone:</strong> +1 5589 55488 55</p>
+            <p><strong>Email:</strong> info@projeturbain.com</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+  <!-- Custom JS for Reclamations Management -->
+  <script>
+    // Exemple de réclamations
+    const reclamations = [
+      { id: 1, projectName: "Projet A", type: "Problème de mobilité", user: "Alice Dupont", date: "2025-04-01", status: "En attente" },
+      { id: 2, projectName: "Projet B", type: "Manque d'infrastructure", user: "Bob Martin", date: "2025-04-02", status: "Résolu" },
+      { id: 3, projectName: "Projet A", type: "Problème de sécurité", user: "Clara Lefevre", date: "2025-04-03", status: "En attente" }
+    ];
+
+    const reclamationsList = document.getElementById("reclamationsList");
+
+    // Fonction pour afficher les réclamations
+    function displayReclamations(filteredReclamations) {
+      reclamationsList.innerHTML = "";
+      filteredReclamations.forEach(reclamation => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${reclamation.id}</td>
+          <td>${reclamation.projectName}</td>
+          <td>${reclamation.type}</td>
+          <td>${reclamation.user}</td>
+          <td>${reclamation.date}</td>
+          <td>${reclamation.status}</td>
+          <td>
+            <button class="btn btn-warning btn-sm">Modifier</button>
+            <button class="btn btn-danger btn-sm">Supprimer</button>
+            <button class="btn btn-info btn-sm" onclick="addComment(${reclamation.id})">Commenter</button>
+          </td>
+        `;
+        reclamationsList.appendChild(row);
+      });
+    }
+
+   
+    function addComment(reclamationId) {
+      alert(`Ajouter un commentaire à la réclamation ${reclamationId}`);
+    }
+
+    
+    document.getElementById("projectFilter").addEventListener("change", () => {
+      const selectedProject = document.getElementById("projectFilter").value;
+      const filteredReclamations = selectedProject === "all" ? reclamations : reclamations.filter(reclamation => reclamation.projectName === selectedProject);
+      displayReclamations(filteredReclamations);
+    });
+
+  
+    displayReclamations(reclamations);
+
+    
+    document.getElementById("addReclamationForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const newReclamation = {
+        id: reclamations.length + 1,
+        projectName: document.getElementById("reclamationProject").value,
+        type: document.getElementById("reclamationType").value,
+        user: "Utilisateur", 
+        date: new Date().toISOString().split('T')[0],
+        status: "En attente"
+      };
+      reclamations.push(newReclamation);
+      displayReclamations(reclamations);
+      document.getElementById("addReclamationModal").querySelector("button[data-bs-dismiss='modal']").click();
+    });
+  </script>
+
+</body>
+
+</html>
