@@ -167,6 +167,24 @@ public function downloadExcel() {
             }
         }
     }
+    public function rechercher()
+    {
+        // Récupérer le nom à rechercher dans le formulaire (méthode GET)
+        $searchNom = isset($_GET['nom']) ? $_GET['nom'] : '';
     
+        // Appeler la méthode de recherche dans le modèle
+        $reclamations = $this->reclamationModel->rechercherReclamations($searchNom);
+    
+        // Vérifier si des réclamations ont été trouvées
+        if (empty($reclamations)) {
+            echo '<p>Aucune réclamation trouvée.</p>';
+        } else {
+            // Afficher les résultats dans un tableau
+          
+            
+            echo '</tbody></table>';
+        }
+        require __DIR__ . '/../views/reclamation/recherch.php';
+    }
     
 }

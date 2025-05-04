@@ -64,10 +64,5 @@ class Reclamation {
         // Retourner les résultats sous forme de tableau
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    
-    
-    
-    
-    
 
 }

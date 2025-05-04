@@ -24,6 +24,20 @@ class ReclamationModel {
         $stmt = $this->pdo->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getAll()
+    {
+        $stmt = $this->pdo->query("SELECT * FROM reclamation");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Rechercher les réclamations par nom
+    public function rechercherReclamations($nom)
+    {
+        $query = "SELECT * FROM reclamations WHERE nom LIKE :nom";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute(['nom' => "%$nom%"]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
     
     
 }
